@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+require "s3cmd"
+S3Cmd::Main.start
