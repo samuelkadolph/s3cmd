@@ -1,5 +1,6 @@
 require "rubygems"
 require "aws"
+require "mime/types"
 require "proxifier/env"
 require "thor"
 
@@ -30,9 +31,11 @@ module S3Cmd
     end
 
     desc "put bucket key file", "puts a file for the key in the bucket"
+    method_option :type, :desc => "override the content type of the file", :type => :string
     def put(bucket, key, file)
       bucket = s3.bucket(bucket)
-      File.open(file, "r") { |f| bucket.put(key, f) }
+      type = options[:type] || MIME::Types.of(file).first.to_s
+      File.open(file, "r") { |f| bucket.put(key, f, {}, nil, { "content-type" => type }) }
     end
 
     private
