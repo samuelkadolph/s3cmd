@@ -1,25 +1,24 @@
-$:.push File.expand_path("../lib", __FILE__)
-require "s3cmd/version"
+require File.expand_path("../.gemspec", __FILE__)
+require File.expand_path("../lib/s3cmd/version", __FILE__)
 
-Gem::Specification.new do |s|
-  s.name        = "s3cmd"
-  s.version     = S3Cmd::VERSION
-  s.authors     = ["Samuel Kadolph"]
-  s.email       = ["samuel@kadolph.com"]
-  s.homepage    = "https://github.com/samuelkadolph/s3cmd"
-  s.summary     = %q{Simple cli tool for interacting with S3.}
-  s.description = <<-DESC
-Provides a s3cmd binary that allows you to create and list buckets as well as list the keys of a bucket and get and upload files
-to s3.
-DESC
+Gem::Specification.new do |gem|
+  gem.name        = "s3cmd"
+  gem.authors     = ["Samuel Kadolph"]
+  gem.email       = ["samuel@kadolph.com"]
+  gem.description = readme.description
+  gem.summary     = readme.summary
+  gem.homepage    = "https://github.com/samuelkadolph/s3cmd"
+  gem.version     = S3Cmd::VERSION
 
-  s.required_ruby_version = ">= 1.8.7"
+  gem.files       = Dir["bin/*", "lib/**/*"]
+  gem.executables = Dir["bin/*"].map(&File.method(:basename))
 
-  s.files       = Dir["bin/*", "lib/**/*"] + ["LICENSE", "README.md"]
-  s.executables = ["s3cmd"]
+  gem.required_ruby_version = ">= 1.8.7"
 
-  s.add_dependency "aws", "~> 2.5.6"
-  s.add_dependency "mime-types", "~> 1.16"
-  s.add_dependency "proxifier", "~> 1.0.2"
-  s.add_dependency "thor", "~> 0.14.6"
+  gem.add_dependency "aws", "~> 2.8.0"
+  gem.add_dependency "mime-types", "~> 1.22"
+  gem.add_dependency "proxifier", "~> 1.0.3"
+  gem.add_dependency "thor", "~> 0.18.1"
+
+  gem.add_development_dependency "rake", "~> 10.0.4"
 end
