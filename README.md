@@ -16,6 +16,12 @@ Install with:
 
     $ gem install s3cmd
 
+Then create a file called `.aws-credentials` in the executing user's home directory.  Inside this file insert the following two lines:
+```
+AWSAccessKeyId={Your AWS Access Key}
+AWSSecretKey={Your AWS secret key}
+```
+
 ## Usage
 
 ```
